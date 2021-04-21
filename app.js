@@ -1,3 +1,9 @@
 window.onload = () =>{
-    console.log('Script works');
+
+    const game = new Vue({
+        el: '.container',
+        data: {
+            header: 'VUE WORKS!!!!'
+        }
+    })
 }
