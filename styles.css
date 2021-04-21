@@ -1,0 +1,206 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png');
+    /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 80vw;
+    height: 80vw;
+    max-width: 660px;
+    max-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 21%;
+    width: 21%;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.show {
+    font-size: 1.25rem;
+}
+
+.deck .card.face-up {
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+}
+
+.deck .card.matched {
+    background: #aa7ecd;
+}
+
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 75%;
+    max-width: 640px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    font-size: 24px;
+}
+
+.moves-para {
+    margin: 0;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    cursor: pointer;
+}
+
+.stars {
+    background: #2e3d49;
+    height: 35px;
+}
+
+.fa-star {
+    margin: 5px;
+}
+
+.fa-star.gold {
+    color: yellow;
+}
+
+.fa-repeat {
+    font-size: 48px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(50, 50, 50, 0.5);
+}
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 375px;
+    height: 270px;
+    background: #f2f3f4;
+    color: #2e3d49;
+    margin: 5% auto;
+    padding: 10px;
+    border: 5px solid #02ccba;
+    border-radius: 5px;
+}
+
+.modal-hidden {
+    display: none;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    width: 250px;
+    align-content: center;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.game-info-block {
+    margin: 5px 0;
+}
+
+.close {
+    width: 75px;
+    height: 40px;
+    background: #02ccba;
+    align-self: flex-end;
+    border: none;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 400px) {
+    .deck .fa {
+        font-size: 0.5em;
+    }
+    .score-panel .stars,
+    .restart {
+        flex-basis: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .timer,
+    .moves-para {
+        flex-basis: 50%;
+    }
+    .timer {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
