@@ -31,16 +31,16 @@
                 </li>
             </ul>
             <p class="moves-para">
-                <span class="moves">{{moves}}</span> Moves
+                <span class="moves">{{moves || 0}}</span> Moves
             </p>
 
 
             <div class="timer">
-                <span id="mins">{{mins}}</span>:
-                <span id="secs">{{secs}}</span>
+                <span id="mins">0</span>:
+                <span id="secs">0</span>
             </div>
 
-            <div class="restart">
+            <div class="restart" v-on:click="showModal">
                 <i class="fa fa-repeat"></i>
             </div>
         </div>
@@ -51,7 +51,7 @@
             </li>
         </ul>
 
-        <div class="modal" v-if="showModal">
+        <div class="modal" v-if="modalShown">
             <div class="modal-content">
                 <h1>Congratulations!</h1>
                 <div class="game-info">
@@ -65,13 +65,13 @@
                     <p class="game-info-block">
                         <span class="rating-span">2</span> stars</p>
                 </div>
-                <button class="close">Close</button>
+                <button class="close" v-on:click="hideModal">Close</button>
                 <div>
                 </div>
             </div>
         </div>
         <!-- production version, optimized for size and speed -->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="https://unpkg.com/vue@next"></script>
         <script src="app.js"></script>
     </div>
 </body>
