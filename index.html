@@ -15,7 +15,7 @@
 
     <div class="container">
         <header>
-            <h1>{{header}}</h1>
+            <h1>Matching Game</h1>
         </header>
 
         <div class="score-panel">
@@ -31,13 +31,13 @@
                 </li>
             </ul>
             <p class="moves-para">
-                <span class="moves">0</span> Moves
+                <span class="moves">{{moves}}</span> Moves
             </p>
 
 
             <div class="timer">
-                <span id="mins">0</span>:
-                <span id="secs">00</span>
+                <span id="mins">{{mins}}</span>:
+                <span id="secs">{{secs}}</span>
             </div>
 
             <div class="restart">
@@ -46,9 +46,12 @@
         </div>
 
         <ul class="deck">
+            <li class="card show" v-for="face in faces">
+                {{face}}
+            </li>
         </ul>
 
-        <div class="modal modal-hidden">
+        <div class="modal" v-if="showModal">
             <div class="modal-content">
                 <h1>Congratulations!</h1>
                 <div class="game-info">
