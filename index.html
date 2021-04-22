@@ -45,8 +45,8 @@
             </div>
         </div>
 
-        <ul class="deck">
-            <card v-for='face in faces' :face="face">
+        <ul class="deck" v-on:load="shuffleDeck">
+            <card v-for='(face, index) in faces' :face="face" @flip-card="flipCard" :id="index">
             </card>
         </ul>
 

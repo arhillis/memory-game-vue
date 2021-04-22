@@ -1,5 +1,8 @@
 
     const Game = Vue.createApp({
+        created(){
+            this.shuffleDeck();
+        },
         data(){
             return {
                 moves: 0,
@@ -24,8 +27,9 @@
                     "fa-bicycle",
                     "fa-bomb"
                 ],
+                faceUpCards: [],
                 modalShown: false,
-                showCards: true
+                matchedCards: 0
             }
         },
         methods: {
@@ -44,26 +48,54 @@
             },
             makeMove(){
                 this.moves++;
+            },
+            flipCard(card){
+                if(this.faceUpCards.length < 2){
+                    card.faceUp = true;
+                    this.faceUpCards.push(card);
+
+                    if(this.faceUpCards.length === 2){
+                        setTimeout(this.endTurn, 2000);
+                    }
+                }
+            },
+            endTurn(){
+                const [firstCard, secondCard] = this.faceUpCards;
+                if(firstCard.face === secondCard.face){
+                    firstCard.matched = true;
+                    secondCard.matched = true;
+                }else{
+                    firstCard.faceUp = false;
+                    secondCard.faceUp = false;
+                }
+
+                this.faceUpCards = [];
+                this.moves++;
             }
         }
         
     })
 
 Game.component('card', {
-    props: ['face', 'showCards'],
+    props: ['id', 'face', 'flipCard'],
     data(){
         return {
-            showCard: false
+            faceUp: false,
+            matched: false
         }
     }, 
-    template: `<li class="card" v-bind:class="{show: showCard}" @click="flipCard">
+    template: `<li class="card animated" v-bind:class="{show: faceUp, matched: matched}"  @click="flip">
                 <i class="fa" v-bind:class="[face]"></i>
             </li>`,
     methods: {
-        flipCard(){
-            this.showCard = !this.showCard;
+        flip(){
+            if(!this.faceUp){
+                this.$emit("flipCard", this);
+            }
+            
         }
     }
 })
 
 Game.mount('.container');
+window.onload = Game.shuffleDeck;
