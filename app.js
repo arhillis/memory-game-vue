@@ -1,5 +1,5 @@
 
-    const Game = ({
+    const Game = Vue.createApp({
         data(){
             return {
                 moves: 0,
@@ -24,14 +24,41 @@
                     "fa-bicycle",
                     "fa-bomb"
                 ],
-                modalShown: false
+                modalShown: false,
+                showCards: true
             }
         },
         methods: {
             showModal(){this.modalShown = true},
-            hideModal(){this.modalShown = false}
+            hideModal(){this.modalShown = false},
+            shuffleDeck(){
+                const {faces} = this;
+                let temp = [];
+                
+                while(faces.length > 0){
+                    let random = Math.floor(Math.random() * faces.length);
+                    temp.push(faces.splice(random, 1)[0]);//Pulls a random element out of the original array and pushes it to the temp array
+                }
+
+                this.faces = [...temp];
+            },
+            makeMove(){
+                this.moves++;
+            }
         }
         
     })
 
-    Vue.createApp(Game).mount('.container');
+Game.component('card', {
+    props: ['face', 'showCards'],
+    template: `<li class="card" v-bind:class="{show: showCards}" @click="flipCard">
+                <i class="fa" v-bind:class="[face]"></i>
+            </li>`,
+    methods: {
+        flipCard(){
+            console.log(this.face)
+        }
+    }
+})
+
+Game.mount('.container');

@@ -19,7 +19,7 @@
         </header>
 
         <div class="score-panel">
-            <ul class="stars">
+            <ul class="stars" v-on:click="showModal">
                 <li>
                     <i class="fa fa-star gold"></i>
                 </li>
@@ -30,8 +30,8 @@
                     <i class="fa fa-star gold"></i>
                 </li>
             </ul>
-            <p class="moves-para">
-                <span class="moves">{{moves || 0}}</span> Moves
+            <p class="moves-para" v-on:click="makeMove">
+                <span class="moves">{{moves}}</span> Moves
             </p>
 
 
@@ -40,15 +40,14 @@
                 <span id="secs">0</span>
             </div>
 
-            <div class="restart" v-on:click="showModal">
+            <div class="restart" v-on:click="shuffleDeck">
                 <i class="fa fa-repeat"></i>
             </div>
         </div>
 
         <ul class="deck">
-            <li class="card show" v-for="face in faces">
-                {{face}}
-            </li>
+            <card v-for='face in faces' :face="face" :show-cards="true">
+            </card>
         </ul>
 
         <div class="modal" v-if="modalShown">
@@ -70,6 +69,7 @@
                 </div>
             </div>
         </div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <!-- production version, optimized for size and speed -->
         <script src="https://unpkg.com/vue@next"></script>
         <script src="app.js"></script>
