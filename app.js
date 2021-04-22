@@ -51,12 +51,17 @@
 
 Game.component('card', {
     props: ['face', 'showCards'],
-    template: `<li class="card" v-bind:class="{show: showCards}" @click="flipCard">
+    data(){
+        return {
+            showCard: false
+        }
+    }, 
+    template: `<li class="card" v-bind:class="{show: showCard}" @click="flipCard">
                 <i class="fa" v-bind:class="[face]"></i>
             </li>`,
     methods: {
         flipCard(){
-            console.log(this.face)
+            this.showCard = !this.showCard;
         }
     }
 })
