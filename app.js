@@ -9,6 +9,7 @@
                 mins: 0,
                 secs: 0,
                 playing: false,
+                stars: 1,
                 faces: [
                     "fa-diamond",
                     "fa-paper-plane-o",
@@ -81,8 +82,9 @@
     })
 
 Game.component('star', {
+    props: ['gold'],
     template: `<li>
-                    <i class="fa fa-star gold"></i>
+                    <i class="fa fa-star" v-bind:class="{gold: gold}"></i>
                 </li>`
 })
 

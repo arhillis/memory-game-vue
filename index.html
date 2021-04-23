@@ -20,9 +20,7 @@
 
         <div class="score-panel">
             <ul class="stars" v-on:click="addStar">
-                <star></star>
-                <star></star>
-                <star></star>
+                <star v-for="s in 3" :gold="s <= stars"></star>
             </ul>
             <p class="moves-para" v-on:click="makeMove">
                 <span class="moves">{{moves}}</span> Moves
