@@ -9,7 +9,7 @@
                 mins: 0,
                 secs: 0,
                 playing: false,
-                stars: 1,
+                stars: 3,
                 faces: [
                     "fa-diamond",
                     "fa-paper-plane-o",
@@ -51,9 +51,6 @@
 
                 this.faces = [...temp];
             },
-            makeMove(){
-                this.moves++;
-            },
             flipCard(card){
                 if(this.faceUpCards.length < 2){
                     card.faceUp = true;
@@ -76,6 +73,10 @@
 
                 this.faceUpCards = [];
                 this.moves++;
+                
+                if(this.moves >= 16 && this.moves % 8 === 0){
+                    this.stars--;
+                }
             }
         }
         
