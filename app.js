@@ -35,6 +35,10 @@
         methods: {
             showModal(){this.modalShown = true},
             hideModal(){this.modalShown = false},
+            addStar(){ 
+                const star = document.createElement('star');
+                document.querySelector('.stars').appendChild(star);
+            },
             shuffleDeck(){
                 const {faces} = this;
                 let temp = [];
@@ -76,6 +80,12 @@
         
     })
 
+Game.component('star', {
+    template: `<li>
+                    <i class="fa fa-star gold"></i>
+                </li>`
+})
+
 Game.component('card', {
     props: ['id', 'face', 'flipCard'],
     data(){
@@ -95,6 +105,29 @@ Game.component('card', {
             
         }
     }
+});
+
+Game.component('modal', {
+    props: ['modalShown'],
+    template: `<div class="modal">
+                <div class="modal-content">
+                    <h1>Congratulations!</h1>
+                    <div class="game-info">
+                        <p class="game-info-block">Time:</p>
+                        <p class="game-info-block">
+                            <span id="mins-modal-span">1</span> minutes,
+                            <span class="secs-modal-span">35</span> seconds</p>
+                        <p class="game-info-block">Moves:</p>
+                        <p class="moves-span game-info-block">10</p>
+                        <p class="game-info-block">Rating:</p>
+                        <p class="game-info-block">
+                            <span class="rating-span">2</span> stars</p>
+                    </div>
+                    <button class="close" v-on:click="hideModal">Close</button>
+                    <div>
+                    </div>
+                </div>
+            </div>`
 })
 
 Game.mount('.container');

@@ -19,16 +19,10 @@
         </header>
 
         <div class="score-panel">
-            <ul class="stars" v-on:click="showModal">
-                <li>
-                    <i class="fa fa-star gold"></i>
-                </li>
-                <li>
-                    <i class="fa fa-star gold"></i>
-                </li>
-                <li>
-                    <i class="fa fa-star gold"></i>
-                </li>
+            <ul class="stars" v-on:click="addStar">
+                <star></star>
+                <star></star>
+                <star></star>
             </ul>
             <p class="moves-para" v-on:click="makeMove">
                 <span class="moves">{{moves}}</span> Moves
@@ -45,7 +39,7 @@
             </div>
         </div>
 
-        <ul class="deck" v-on:load="shuffleDeck">
+        <ul class="deck">
             <card v-for='(face, index) in faces' :face="face" @flip-card="flipCard" :id="index">
             </card>
         </ul>
