@@ -28,6 +28,7 @@
                     "fa-bicycle",
                     "fa-bomb"
                 ],
+                cards: [],
                 faceUpCards: [],
                 modalShown: false,
                 matchedCards: 0
@@ -46,7 +47,8 @@
                 
                 while(faces.length > 0){
                     let random = Math.floor(Math.random() * faces.length);
-                    temp.push(faces.splice(random, 1)[0]);//Pulls a random element out of the original array and pushes it to the temp array
+                    const face = faces.splice(random, 1)[0]
+                    temp.push(face);//Pulls a random element out of the original array and pushes it to the temp array
                 }
 
                 this.faces = [...temp];
