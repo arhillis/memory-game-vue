@@ -38,7 +38,7 @@
         </div>
 
         <ul class="deck">
-            <card v-for='(face, index) in faces' :face="face" @flip-card="flipCard" :id="index">
+            <card v-for='(card, index) in cards' :card="card" @flip-card="flipCard" :id="index">
             </card>
         </ul>
 

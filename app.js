@@ -52,8 +52,6 @@
                     this.cards.push({face, faceUp: false, matched: false})
                 }
 
-                console.log(this.cards);
-
                 this.faces = [...temp];
             },
             flipCard(card){
@@ -95,11 +93,13 @@ Game.component('star', {
 })
 
 Game.component('card', {
-    props: ['id', 'face', 'flipCard'],
+    props: ['id', 'card', 'flipCard'],
     data(){
+        const {face, faceUp, matched} = this.card;
         return {
-            faceUp: false,
-            matched: false
+            face,
+            faceUp,
+            matched
         }
     }, 
     template: `<li class="card animated" v-bind:class="{show: faceUp, matched: matched}"  @click="flip">
