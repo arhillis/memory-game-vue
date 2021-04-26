@@ -49,7 +49,10 @@
                     let random = Math.floor(Math.random() * faces.length);
                     const face = faces.splice(random, 1)[0]
                     temp.push(face);//Pulls a random element out of the original array and pushes it to the temp array
+                    this.cards.push({face, faceUp: false, matched: false})
                 }
+
+                console.log(this.cards);
 
                 this.faces = [...temp];
             },
