@@ -30,6 +30,21 @@
                 modalShown: false,
                 matchedCards: 0
             }
+        },
+        methods: {
+            shuffleDeck(){
+                const faces = this.cards.length === 0 ? this.faces : Object.values(this.cards).map(card => card.face);
+                let temp = [];
+
+                    while(faces.length > 0){
+                        const randomIndex = Math.floor(Math.random() * faces.length);
+                        temp.push({face: faces.splice(randomIndex, 1)[0], matched: false})
+                    }
+                    this.cards = [...temp];
+            }
+        },
+        created(){
+            this.shuffleDeck();
         }
     })
 
