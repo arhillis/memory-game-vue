@@ -12,11 +12,10 @@
 </head>
 
 <body>
-    <div class="app">
-        <button @click="shuffleDeck">Shuffle</button>
-        <div v-if="cards.length > 0" v-for="card in Object.values(cards)">
-            {{card.face}}
-        </div>
+    <div class="app" @flip-card: 'flipCard'>
+
+
+
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- production version, optimized for size and speed -->
