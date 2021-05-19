@@ -2,10 +2,8 @@
     const Game = Vue.createApp({
         template: `
             <button @click="shuffleDeck">Shuffle</button>
-            <div class="deck" v-if="cards.length > 0">
-                <card v-for="card in Object.values(cards)" :card="card" @flip-card="flipCard">
-                </card>
-            </div>
+            <deck :cards="cards" @flip-card="flipCard">
+            </deck>
         `,
         data(){
             return {
@@ -59,6 +57,15 @@
         }
     })
 
+Game.component('deck', {
+    props: ['cards'],
+    template: `<div class="deck" v-if="cards.length > 0">
+                    <card v-for="card in Object.values(cards)" :card="card" @flip-card="$emit('flip-card', card.id, !card.faceUp)">
+                    </card>
+                </div>`
+
+})
+
 Game.component('card', {
     props: ['card'],
     template: `<div :class="[card.faceUp ? 'face-up' : '', 'card']" @click="flipCard">
@@ -66,7 +73,7 @@ Game.component('card', {
                 </div>`,
     methods: {
         flipCard(){
-            this.$emit('flip-card', this.card.id, !this.card.faceUp);
+            this.$emit('flip-card');
         }
     }
 })
