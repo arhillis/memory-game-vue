@@ -13,58 +13,10 @@
 
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Matching Game</h1>
-        </header>
-
-        <div class="score-panel">
-            <ul class="stars" v-on:click="addStar">
-                <star v-for="s in 3" :gold="s <= stars"></star>
-            </ul>
-            <p class="moves-para">
-                <span class="moves">{{moves}}</span> Moves
-            </p>
-
-
-            <div class="timer">
-                <span id="mins">0</span>:
-                <span id="secs">0</span>
-            </div>
-
-            <div class="restart" v-on:click="shuffleDeck">
-                <i class="fa fa-repeat"></i>
-            </div>
-        </div>
-
-        <ul class="deck">
-            <card v-for='(card, index) in cards' :card="card" @flip-card="flipCard" :id="index">
-            </card>
-        </ul>
-
-        <div class="modal" v-if="modalShown">
-            <div class="modal-content">
-                <h1>Congratulations!</h1>
-                <div class="game-info">
-                    <p class="game-info-block">Time:</p>
-                    <p class="game-info-block">
-                        <span id="mins-modal-span">1</span> minutes,
-                        <span class="secs-modal-span">35</span> seconds</p>
-                    <p class="game-info-block">Moves:</p>
-                    <p class="moves-span game-info-block">10</p>
-                    <p class="game-info-block">Rating:</p>
-                    <p class="game-info-block">
-                        <span class="rating-span">2</span> stars</p>
-                </div>
-                <button class="close" v-on:click="hideModal">Close</button>
-                <div>
-                </div>
-            </div>
-        </div>
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <!-- production version, optimized for size and speed -->
-        <script src="https://unpkg.com/vue@next"></script>
-        <script src="app.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- production version, optimized for size and speed -->
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
     </div>
 </body>
 
