@@ -47,9 +47,18 @@
                     }
                     this.cards = [...temp];
             },
-            flipCard(id, faceUp){
-                const cardIndex = this.cards.findIndex(card => card.id === id);
-                this.cards[cardIndex].faceUp = faceUp;
+            flipCard(id){
+                if(this.faceUpCards.length < 2){
+                    const cardIndex = this.cards.findIndex(card => card.id === id);
+                    const card = this.cards[cardIndex];
+
+                    this.cards[cardIndex].faceUp = true;      
+                    this.faceUpCards.push(card);
+                    this.takeTurn();       
+                }                
+            },
+            takeTurn(){
+                console.log('Turn taken');
             }
         },
         created(){
@@ -60,7 +69,7 @@
 Game.component('deck', {
     props: ['cards'],
     template: `<div class="deck" v-if="cards.length > 0">
-                    <card v-for="card in Object.values(cards)" :card="card" @flip-card="$emit('flip-card', card.id, !card.faceUp)">
+                    <card v-for="card in Object.values(cards)" :card="card" @flip-card="$emit('flip-card', card.id)">
                     </card>
                 </div>`
 
@@ -69,11 +78,12 @@ Game.component('deck', {
 Game.component('card', {
     props: ['card'],
     template: `<div :class="[card.faceUp ? 'face-up' : '', 'card']" @click="flipCard">
-                    {{card.face}}
+                    <i class="fa" :class="[card.face]"></i>
                 </div>`,
     methods: {
         flipCard(){
-            this.$emit('flip-card');
+            if(!this.faceUp)
+                this.$emit('flip-card');
         }
     }
 })
