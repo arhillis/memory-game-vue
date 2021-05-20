@@ -58,7 +58,27 @@
                 }                
             },
             takeTurn(){
-                console.log('Turn taken');
+                const [card1, card2] = this.faceUpCards;
+
+                if(card2){
+                    setTimeout(() => {
+                        if(card1.face === card2.face){
+                            card1.matched = true;
+                            card2.matched = true;
+                            this.matchedCards += 2;
+                            if(this.matchedCards === this.cards.length)
+                                this.endGame();
+                        }else{
+                            card2.faceUp = false;
+                            card1.faceUp = false;
+                        }
+                        this.faceUpCards = [];
+                    }, 2000);
+                    
+                }
+            },
+            endGame(){
+                console.log('Game Over!');
             }
         },
         created(){
