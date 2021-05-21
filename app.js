@@ -1,7 +1,10 @@
 
     const Game = Vue.createApp({
         template: `
-            <button @click="shuffleDeck">Shuffle</button>
+            <panel :moves="moves"
+                @shuffle-deck="shuffleDeck" 
+                @restart-game="restartGame"
+            ></panel>
             <deck :cards="cards" @flip-card="flipCard">
             </deck>
         `,
@@ -48,6 +51,7 @@
                     this.cards = [...temp];
             },
             flipCard(id){
+                console.log(this.faceUpCards)
                 if(this.faceUpCards.length < 2){
                     const cardIndex = this.cards.findIndex(card => card.id === id);
                     const card = this.cards[cardIndex];
@@ -73,18 +77,32 @@
                             card1.faceUp = false;
                         }
                         this.faceUpCards = [];
+                        this.moves++;
                     }, 2000);
                     
                 }
             },
             endGame(){
                 console.log('Game Over!');
+            },
+            restartGame(){
+                this.shuffleDeck();
+                this.moves = 0;
             }
         },
         created(){
             this.shuffleDeck();
         }
     })
+
+Game.component('panel', {
+    props: ['moves'],
+    template: `<div class="score-panel">
+        <p class="moves-para">Moves: {{moves}}</p>
+        <i class="fa fa-repeat" @click="$emit('restart-game')"></i>
+    </div>`,
+
+});
 
 Game.component('deck', {
     props: ['cards'],
@@ -102,7 +120,7 @@ Game.component('card', {
                 </div>`,
     methods: {
         flipCard(){
-            if(!this.faceUp)
+            if(!this.card.faceUp)
                 this.$emit('flip-card');
         }
     }
