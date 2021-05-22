@@ -1,6 +1,7 @@
 
     const Game = Vue.createApp({
         template: `
+            <headr></headr>
             <panel :moves="moves" :mins="mins" :secs="secs"
                 @shuffle-deck="shuffleDeck" 
                 @restart-game="restartGame"
@@ -113,6 +114,12 @@ Game.component('panel', {
         <i class="fa fa-repeat" @click="$emit('restart-game')"></i>
     </div>`,
 
+});
+
+Game.component('headr', {
+    template: `<header>
+        <h1>Memory Game</h1>
+    </header>`
 });
 
 Game.component('deck', {
